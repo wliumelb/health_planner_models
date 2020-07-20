@@ -11,7 +11,7 @@ class DoctorModel {
   final String registrationNumber; // registration number with AHPRA.
   final bool genderIsMale;
   final List<InfoSectionModel> info;
-  final List<InfoSectionModel>  chineseInfo;
+  final List<InfoSectionModel> chineseInfo;
   final String photoUrl;
   final List<String> languages;
   final String specialty;
@@ -45,12 +45,16 @@ class DoctorModel {
       url: map['url'],
       registrationNumber: map['registrationNumber'],
       genderIsMale: map['genderIsMale'],
-      info: List.from(map['info']).map((map) => InfoSectionModel.fromMap(map)).toList(),
-      chineseInfo: List.from(map['chineseInfo']).map((map) => InfoSectionModel.fromMap(map)).toList(),
+      info: List.from(map['info'] ?? [])
+          .map((map) => InfoSectionModel.fromMap(map))
+          .toList(),
+      chineseInfo: List.from(map['chineseInfo'] ?? [])
+          .map((map) => InfoSectionModel.fromMap(map))
+          .toList(),
       photoUrl: map['photoUrl'],
       languages: List<String>.from(map['languages']),
       specialty: map['specialty'],
-      schedule: ScheduleModel.fromMap(map['schedule']),
+      schedule: ScheduleModel.fromMap(map['schedule'] ?? {}),
     );
   }
 }

@@ -11,7 +11,7 @@ class InfoSectionModel {
   });
   static InfoSectionModel fromMap(Map<String, dynamic> map) {
     return InfoSectionModel(
-      title: map['title'], // could be null
+      title: map['title'] ?? '',
       photoUrl: map['photoUrl'], // could be null
       paragraphs: List<String>.from(map['paragraphs' ?? []]),
     );

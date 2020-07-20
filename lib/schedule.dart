@@ -34,26 +34,26 @@ class ScheduleModel {
         ];
 
   static ScheduleModel fromMap(Map<String, dynamic> map) {
-    final int length = map['length'];
-    final monday = List<String>.from(map['monday'])
+    final int length = map['length'] ?? 15;
+    final monday = List<String>.from(map['monday'] ?? [])
         .map((timeString) => _Interval.fromString(timeString))
         .toList();
-    final tuesday = List<String>.from(map['tuesday'])
+    final tuesday = List<String>.from(map['tuesday'] ?? [])
         .map((timeString) => _Interval.fromString(timeString))
         .toList();
-    final wednesday = List<String>.from(map['wednesday'])
+    final wednesday = List<String>.from(map['wednesday'] ?? [])
         .map((timeString) => _Interval.fromString(timeString))
         .toList();
-    final thursday = List<String>.from(map['thursday'])
+    final thursday = List<String>.from(map['thursday'] ?? [])
         .map((timeString) => _Interval.fromString(timeString))
         .toList();
-    final friday = List<String>.from(map['friday'])
+    final friday = List<String>.from(map['friday'] ?? [])
         .map((timeString) => _Interval.fromString(timeString))
         .toList();
-    final saturday = List<String>.from(map['saturday'])
+    final saturday = List<String>.from(map['saturday'] ?? [])
         .map((timeString) => _Interval.fromString(timeString))
         .toList();
-    final sunday = List<String>.from(map['sunday'])
+    final sunday = List<String>.from(map['sunday'] ?? [])
         .map((timeString) => _Interval.fromString(timeString))
         .toList();
 
@@ -93,7 +93,6 @@ class ScheduleModel {
         .toList();
   }
 }
-
 
 class _Interval {
   final int startHour;
