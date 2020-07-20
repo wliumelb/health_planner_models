@@ -7,7 +7,7 @@ class DoctorModel {
   final String chineseName;
   final String uid;
   // url of booking page(for web only) before; need use other platforms like hotdoc for now
-  final String url;
+  final String thirdPartyUrl;
   final String registrationNumber; // registration number with AHPRA.
   final bool genderIsMale;
   final List<InfoSectionModel> info;
@@ -21,7 +21,7 @@ class DoctorModel {
     @required this.name,
     @required this.chineseName,
     @required this.uid,
-    @required this.url,
+    @required this.thirdPartyUrl,
     @required this.registrationNumber,
     @required this.genderIsMale,
     @required this.info,
@@ -42,7 +42,7 @@ class DoctorModel {
       name: map['name'],
       chineseName: map['chineseName'],
       uid: map['uid'],
-      url: map['url'],
+      thirdPartyUrl: map['thirdPartyUrl'],
       registrationNumber: map['registrationNumber'],
       genderIsMale: map['genderIsMale'],
       info: List.from(map['info'] ?? [])
