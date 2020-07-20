@@ -6,7 +6,7 @@ class InfoSectionModel {
   final List<String> paragraphs;
   InfoSectionModel({
     @required this.title,
-    @required this.photoUrl,
+    this.photoUrl,
     @required this.paragraphs,
   });
   static InfoSectionModel fromMap(Map<String, dynamic> map) {
