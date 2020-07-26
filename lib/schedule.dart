@@ -4,24 +4,24 @@ class ScheduleModel {
   int _length; // length of an appointment in minuts, 10,15,20 or 30
   List<List<_Interval>> dayIntervals; // length should be 7
 
-  get length => _length;
-  get monday => dayIntervals[1];
-  get tuesday => dayIntervals[2];
-  get wednesday => dayIntervals[3];
-  get thursday => dayIntervals[4];
-  get friday => dayIntervals[5];
-  get saturday => dayIntervals[6];
-  get sunday => dayIntervals[0];
+  int get length => _length;
+  List<_Interval> get monday => dayIntervals[1];
+  List<_Interval> get tuesday => dayIntervals[2];
+  List<_Interval> get wednesday => dayIntervals[3];
+  List<_Interval> get thursday => dayIntervals[4];
+  List<_Interval> get friday => dayIntervals[5];
+  List<_Interval> get saturday => dayIntervals[6];
+  List<_Interval> get sunday => dayIntervals[0];
 
   ScheduleModel({
-    @required length,
-    monday = const [],
-    tuesday = const [],
-    wednesday = const [],
-    thursday = const [],
-    friday = const [],
-    saturday = const [],
-    sunday = const [],
+    @required int length,
+    List<_Interval> monday = const [],
+    List<_Interval> tuesday = const [],
+    List<_Interval> wednesday = const [],
+    List<_Interval> thursday = const [],
+    List<_Interval> friday = const [],
+    List<_Interval> saturday = const [],
+    List<_Interval> sunday = const [],
   })  : _length = length,
         dayIntervals = [
           sunday,

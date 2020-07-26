@@ -57,4 +57,25 @@ class DoctorModel {
       schedule: ScheduleModel.fromMap(map['schedule'] ?? {}),
     );
   }
+
+  Map<String, dynamic> toMap() {
+    final info = this.info.map((infoSection) => infoSection.toMap()).toList();
+    final chineseInfo =
+        this.chineseInfo.map((infoSection) => infoSection.toMap()).toList();
+    final schedule = this.schedule.toMap();
+
+    return {
+      'name': this.name,
+      'uid': this.uid,
+      'chineseName': this.chineseName,
+      'thirdPartyUrl': this.thirdPartyUrl,
+      'genderIsMale': this.genderIsMale,
+      'photoUrl': this.photoUrl,
+      'specialty': this.specialty,
+      'languages': this.languages,
+      'info': info,
+      'chineseInfo': chineseInfo,
+      'schedule': schedule,
+    };
+  }
 }

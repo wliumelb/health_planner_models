@@ -16,4 +16,12 @@ class InfoSectionModel {
       paragraphs: List<String>.from(map['paragraphs' ?? []]),
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'title': this.title,
+      'photoUrl': this.photoUrl,
+      'paragraphs': this.paragraphs,
+    };
+  }
 }

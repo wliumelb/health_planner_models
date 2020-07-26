@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import 'address.dart';
 import 'display_section.dart';
 import 'doctor.dart';
 import 'info_section.dart';
@@ -89,37 +90,5 @@ class ClinicModel {
       fax: map['fax'],
       thirdPartyUrl: map['thirdPartyUrl'],
     );
-  }
-}
-
-class Address {
-  final String officeLocation;
-  final String streetAddress;
-  final String suburb;
-  final String state;
-  final String postcode;
-  Address({
-    @required this.officeLocation,
-    @required this.streetAddress,
-    @required this.suburb,
-    @required this.state,
-    @required this.postcode,
-  });
-  static Address fromMap(Map<String, String> map) {
-    return Address(
-      officeLocation: map['officeLocaiton'],
-      streetAddress: map['streetAddress'],
-      suburb: map['suburb'],
-      state: map['state'],
-      postcode: map['postcode'],
-    );
-  }
-
-  String toString() {
-    if (officeLocation != null && officeLocation != '') {
-      return '$officeLocation / $streetAddress, $suburb, $state $postcode';
-    }
-
-    return '$streetAddress, $suburb, $state $postcode';
   }
 }
