@@ -22,6 +22,8 @@ class PatientModel {
     @required this.dateOfBirth,
   });
 
+  String get name => '${this.firstName ?? ''} ${this.lastName ?? ''}'.trim();
+
   static PatientModel fromMap(Map<String, dynamic> map) {
     final String uid = map['uid'];
     final address = Address.fromMap(Map.from(map['address']));
