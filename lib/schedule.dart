@@ -2,16 +2,18 @@ import 'package:flutter/foundation.dart';
 
 class ScheduleModel {
   int _length; // length of an appointment in minuts, 10,15,20 or 30
-  List<List<IntervalModel>> dayIntervals; // length should be 7
+  List<List<IntervalModel>> _dayIntervals; // length should be 7
 
   int get length => _length;
-  List<IntervalModel> get monday => dayIntervals[1];
-  List<IntervalModel> get tuesday => dayIntervals[2];
-  List<IntervalModel> get wednesday => dayIntervals[3];
-  List<IntervalModel> get thursday => dayIntervals[4];
-  List<IntervalModel> get friday => dayIntervals[5];
-  List<IntervalModel> get saturday => dayIntervals[6];
-  List<IntervalModel> get sunday => dayIntervals[0];
+  List<IntervalModel> get monday => _dayIntervals[1];
+  List<IntervalModel> get tuesday => _dayIntervals[2];
+  List<IntervalModel> get wednesday => _dayIntervals[3];
+  List<IntervalModel> get thursday => _dayIntervals[4];
+  List<IntervalModel> get friday => _dayIntervals[5];
+  List<IntervalModel> get saturday => _dayIntervals[6];
+  List<IntervalModel> get sunday => _dayIntervals[0];
+
+  List<IntervalModel> getDay(int day) => _dayIntervals[day];
 
   ScheduleModel({
     @required int length,
@@ -23,7 +25,7 @@ class ScheduleModel {
     List<IntervalModel> saturday = const [],
     List<IntervalModel> sunday = const [],
   })  : _length = length,
-        dayIntervals = [
+        _dayIntervals = [
           sunday,
           monday,
           tuesday,
@@ -88,7 +90,7 @@ class ScheduleModel {
 
   /// intervals should be like ['0900-1200', '1300-1600'], sunday is 0, monday 1, ... satruday 6
   void setDaySchedule({@required int day, List<String> intervals = const []}) {
-    this.dayIntervals[day] = intervals
+    this._dayIntervals[day] = intervals
         .map((intervalString) => IntervalModel.fromString(intervalString))
         .toList();
   }
