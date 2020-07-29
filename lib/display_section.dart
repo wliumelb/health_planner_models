@@ -16,4 +16,12 @@ class DisplaySectionModel {
       photoUrl: map['photoUrl'],
     );
   }
+
+  Map<String, String> toMap() {
+    return {
+      'title': this.title,
+      'body': this.body,
+      'photoUrl': this.photoUrl,
+    };
+  }
 }

@@ -8,13 +8,15 @@ import 'info_section.dart';
 class ClinicModel {
   final String uid;
   final String name;
+  final bool isBulkBilling;
+  final bool isChinese;
   final List<InfoSectionModel> info; // infomation for the patients
   final List<InfoSectionModel> about; // about the clinic
   final List<InfoSectionModel> services; // about the clinic
   final List<InfoSectionModel> billingPolicy;
+  final List<InfoSectionModel> news;
   final List<DisplaySectionModel> displayList; // photo and message on homepage
   final List<String> privacyPolicy;
-  final List<InfoSectionModel> news;
   final InfoSectionModel
       intro; // some message to show to visitors. e.g. Covid-19 Notifications
   final String photoUrl;
@@ -27,6 +29,8 @@ class ClinicModel {
   ClinicModel({
     @required this.uid,
     @required this.name,
+    @required this.isBulkBilling,
+    @required this.isChinese,
     @required this.about,
     @required this.services,
     @required this.info,
@@ -74,6 +78,8 @@ class ClinicModel {
     return ClinicModel(
       uid: uid,
       name: map['name'],
+      isBulkBilling: map['isBulkBilling'],
+      isChinese: map['isChinese'],
       about: about,
       services: services,
       info: info,
@@ -90,5 +96,30 @@ class ClinicModel {
       fax: map['fax'],
       thirdPartyUrl: map['thirdPartyUrl'],
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'uid': this.uid,
+      'name': this.name,
+      'isBulkBilling': this.isBulkBilling,
+      'isChinese': this.isChinese,
+      'about': this.about.map((info) => info.toMap()).toList(),
+      'info': this.info.map((info) => info.toMap()).toList(),
+      'news': this.news.map((info) => info.toMap()).toList(),
+      'billingPolicy': this.billingPolicy.map((info) => info.toMap()).toList(),
+      'services': this.services.map((info) => info.toMap()).toList(),
+      'address': this.address.toMap(),
+      'doctorList': this.doctorList.map((doctor) => doctor.toMap()).toList(),
+      'privacyPolicy': this.privacyPolicy,
+      'intro': this.intro.toMap(),
+      'phone': this.phone,
+      'email': this.email,
+      'photoUrl': this.photoUrl,
+      'fax': this.fax,
+      'thirdPartyUrl': this.thirdPartyUrl,
+      'displayList':
+          this.displayList.map((display) => display.toMap()).toList(),
+    };
   }
 }
