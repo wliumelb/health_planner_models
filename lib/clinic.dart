@@ -10,6 +10,8 @@ class ClinicModel {
   final String name;
   final bool isBulkBilling;
   final bool isChinese;
+  final String specialty;
+  final List<String> languages;
   final List<InfoSectionModel> info; // infomation for the patients
   final List<InfoSectionModel> about; // about the clinic
   final List<InfoSectionModel> services; // about the clinic
@@ -29,8 +31,10 @@ class ClinicModel {
   ClinicModel({
     @required this.uid,
     @required this.name,
+    @required this.specialty,
     @required this.isBulkBilling,
     @required this.isChinese,
+    @required this.languages,
     @required this.about,
     @required this.services,
     @required this.info,
@@ -74,12 +78,15 @@ class ClinicModel {
     final displayList = List<Map>.from(map['displayList'])
         .map((e) => DisplaySectionModel.fromMap(e))
         .toList();
+    final languages = List<String>.from(map['languages'] ?? []).toList();
     final address = Address.fromMap(Map.from(map['address']));
     return ClinicModel(
       uid: uid,
       name: map['name'],
+      specialty: map['specialty'],
       isBulkBilling: map['isBulkBilling'],
       isChinese: map['isChinese'],
+      languages: languages,
       about: about,
       services: services,
       info: info,
@@ -102,6 +109,7 @@ class ClinicModel {
     return {
       'uid': this.uid,
       'name': this.name,
+      'specialty': this.specialty,
       'isBulkBilling': this.isBulkBilling,
       'isChinese': this.isChinese,
       'about': this.about.map((info) => info.toMap()).toList(),
