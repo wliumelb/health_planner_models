@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:health_planner_models/contact_info.dart';
 
 import 'address.dart';
 import 'display_section.dart';
@@ -11,6 +12,7 @@ class ClinicModel {
   final bool isBulkBilling;
   final bool isChinese;
   final String specialty;
+  final String photoUrl;
   final List<String> languages;
 
   /// general information for patient; e.g. how to register & what to do when visit the clinic
@@ -36,18 +38,14 @@ class ClinicModel {
   /// banner on the home page for important notifications
   final InfoSectionModel intro;
 
-  final String photoUrl;
-  final String phone;
-  final String fax;
+  final ContactInfoModel contactInfo;
   final AddressModel address;
-  final String email;
 
-  /// link to third party urls. e.g. hotdoc page
-  final String thirdPartyUrl;
   final List<DoctorModel> doctorList;
   ClinicModel({
     @required this.uid,
     @required this.name,
+    @required this.photoUrl,
     @required this.specialty,
     @required this.isBulkBilling,
     @required this.isChinese,
@@ -59,12 +57,8 @@ class ClinicModel {
     @required this.intro,
     @required this.billingPolicy,
     @required this.privacyPolicy,
-    @required this.photoUrl,
     @required this.address,
-    @required this.fax,
-    @required this.phone,
-    @required this.email,
-    @required this.thirdPartyUrl,
+    @required this.contactInfo,
     @required this.doctorList,
     @required this.displayList,
   });
@@ -96,13 +90,16 @@ class ClinicModel {
         .map((e) => DisplaySectionModel.fromMap(e))
         .toList();
     final languages = List<String>.from(map['languages'] ?? []).toList();
-    final address = AddressModel.fromMap(Map.from(map['address']));
+    // suburb and geopoint are saved at the root level of the firbase document for collection query
+    final address = AddressModel.fromMap(map);
+    final contactInfo = ContactInfoModel.fromMap(Map.from(map['contactInfo']));
     return ClinicModel(
       uid: uid,
       name: map['name'],
       specialty: map['specialty'],
       isBulkBilling: map['isBulkBilling'],
       isChinese: map['isChinese'],
+      photoUrl: map['photoUrl'],
       languages: languages,
       about: about,
       services: services,
@@ -111,14 +108,10 @@ class ClinicModel {
       intro: intro,
       billingPolicy: billingPolicy,
       privacyPolicy: privacyPolicy,
-      phone: map['phone'],
-      photoUrl: map['photoUrl'],
       address: address,
-      email: map['email'],
+      contactInfo: contactInfo,
       doctorList: doctorList,
       displayList: displayList,
-      fax: map['fax'],
-      thirdPartyUrl: map['thirdPartyUrl'],
     );
   }
 
@@ -134,17 +127,15 @@ class ClinicModel {
       'news': this.news.map((info) => info.toMap()).toList(),
       'billingPolicy': this.billingPolicy.map((info) => info.toMap()).toList(),
       'services': this.services.map((info) => info.toMap()).toList(),
-      'address': this.address.toMap(),
       'doctorList': this.doctorList.map((doctor) => doctor.toMap()).toList(),
       'privacyPolicy': this.privacyPolicy,
       'intro': this.intro.toMap(),
-      'phone': this.phone,
-      'email': this.email,
+      'contactInfo': this.contactInfo.toMap(),
       'photoUrl': this.photoUrl,
-      'fax': this.fax,
-      'thirdPartyUrl': this.thirdPartyUrl,
       'displayList':
           this.displayList.map((display) => display.toMap()).toList(),
+      // save the address parameters at the root to make firebase collection query easier
+      ...this.address.toMap(),
     };
   }
 }
