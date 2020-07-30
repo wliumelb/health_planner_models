@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
-
-/// this file is copied from firestore library
-import 'firestore_geopoint.dart';
+import 'package:cloud_firestore_platform_interface/cloud_firestore_platform_interface.dart';
 
 class AddressModel {
   final String unitNumber;
