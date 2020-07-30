@@ -7,7 +7,7 @@ class PatientModel {
   final String firstName;
   final String lastName;
   final String uid;
-  final Address address;
+  final AddressModel address;
   final String phoneNumber;
   final String medicareNumber;
   final DateTime dateOfBirth;
@@ -26,7 +26,7 @@ class PatientModel {
 
   static PatientModel fromMap(Map<String, dynamic> map) {
     final String uid = map['uid'];
-    final address = Address.fromMap(Map.from(map['address']));
+    final address = AddressModel.fromMap(Map.from(map['address']));
     final dateOfBirth = DateTime.parse(map['dateOfBirth']);
 
     assert(uid != null);

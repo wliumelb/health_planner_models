@@ -24,7 +24,7 @@ class ClinicModel {
   final String photoUrl;
   final String phone;
   final String fax;
-  final Address address;
+  final AddressModel address;
   final String email;
   final String thirdPartyUrl;
   final List<DoctorModel> doctorList;
@@ -79,7 +79,7 @@ class ClinicModel {
         .map((e) => DisplaySectionModel.fromMap(e))
         .toList();
     final languages = List<String>.from(map['languages'] ?? []).toList();
-    final address = Address.fromMap(Map.from(map['address']));
+    final address = AddressModel.fromMap(Map.from(map['address']));
     return ClinicModel(
       uid: uid,
       name: map['name'],

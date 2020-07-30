@@ -1,20 +1,20 @@
 import 'package:flutter/foundation.dart';
 
-class Address {
+class AddressModel {
   final String unitNumber;
   final String streetAddress;
   final String suburb;
   final String state;
   final String postcode;
-  Address({
+  AddressModel({
     @required this.unitNumber,
     @required this.streetAddress,
     @required this.suburb,
     @required this.state,
     @required this.postcode,
   });
-  static Address fromMap(Map<String, String> map) {
-    return Address(
+  static AddressModel fromMap(Map<String, String> map) {
+    return AddressModel(
       unitNumber: map['unitNumber'],
       streetAddress: map['streetAddress'],
       suburb: map['suburb'],
