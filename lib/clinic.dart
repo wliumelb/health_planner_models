@@ -12,20 +12,37 @@ class ClinicModel {
   final bool isChinese;
   final String specialty;
   final List<String> languages;
-  final List<InfoSectionModel> info; // infomation for the patients
-  final List<InfoSectionModel> about; // about the clinic
-  final List<InfoSectionModel> services; // about the clinic
+
+  /// general information for patient; e.g. how to register & what to do when visit the clinic
+  final List<InfoSectionModel> info;
+
+  /// general information about the clinic
+  final List<InfoSectionModel> about;
+
+  /// list of services provided at the clinic
+  final List<InfoSectionModel> services;
+
+  /// information related to billing
   final List<InfoSectionModel> billingPolicy;
+
+  /// news about the clinic
   final List<InfoSectionModel> news;
-  final List<DisplaySectionModel> displayList; // photo and message on homepage
+
+  /// what to display on the home page
+  final List<DisplaySectionModel> displayList;
+
   final List<String> privacyPolicy;
-  final InfoSectionModel
-      intro; // some message to show to visitors. e.g. Covid-19 Notifications
+
+  /// banner on the home page for important notifications
+  final InfoSectionModel intro;
+
   final String photoUrl;
   final String phone;
   final String fax;
   final AddressModel address;
   final String email;
+
+  /// link to third party urls. e.g. hotdoc page
   final String thirdPartyUrl;
   final List<DoctorModel> doctorList;
   ClinicModel({
