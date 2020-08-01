@@ -73,6 +73,19 @@ class ScheduleModel {
     );
   }
 
+  static ScheduleModel empty() {
+    return ScheduleModel(
+      length: 15,
+      monday: [],
+      tuesday: [],
+      wednesday: [],
+      thursday: [],
+      friday: [],
+      saturday: [],
+      sunday: [],
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'length': length,

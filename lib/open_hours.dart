@@ -54,15 +54,27 @@ class OpenHoursModel {
     );
   }
 
+  static OpenHoursModel empty() {
+    return OpenHoursModel(
+      monday: null,
+      tuesday: null,
+      wednesday: null,
+      thursday: null,
+      friday: null,
+      saturday: null,
+      sunday: null,
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
-      'monday': monday.toString(),
-      'tuesday': tuesday.toString(),
-      'wednesday': wednesday.toString(),
-      'thursday': thursday.toString(),
-      'friday': friday.toString(),
-      'saturday': saturday.toString(),
-      'sunday': sunday.toString(),
+      'monday': monday?.toString(),
+      'tuesday': tuesday?.toString(),
+      'wednesday': wednesday?.toString(),
+      'thursday': thursday?.toString(),
+      'friday': friday?.toString(),
+      'saturday': saturday?.toString(),
+      'sunday': sunday?.toString(),
     };
   }
 
