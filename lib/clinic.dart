@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:health_planner_models/contact_info.dart';
+import 'package:health_planner_models/open_hours.dart';
 
 import 'address.dart';
 import 'display_section.dart';
@@ -14,6 +15,7 @@ class ClinicModel {
   final String specialty;
   final String photoUrl;
   final List<String> languages;
+  final OpenHoursModel openHours;
 
   /// general information for patient; e.g. how to register & what to do when visit the clinic
   final List<InfoSectionModel> info;
@@ -47,6 +49,7 @@ class ClinicModel {
     @required this.name,
     @required this.photoUrl,
     @required this.specialty,
+    @required this.openHours,
     @required this.isBulkBilling,
     @required this.isChinese,
     @required this.languages,
@@ -90,6 +93,7 @@ class ClinicModel {
         .map((e) => DisplaySectionModel.fromMap(e))
         .toList();
     final languages = List<String>.from(map['languages'] ?? []).toList();
+    final openHours = OpenHoursModel.fromMap(Map.from(map['openHours']));
     // suburb and geopoint are saved at the root level of the firbase document for collection query
     final address = AddressModel.fromMap(map);
     final contactInfo = ContactInfoModel.fromMap(Map.from(map['contactInfo']));
@@ -98,6 +102,7 @@ class ClinicModel {
       name: map['name'],
       specialty: map['specialty'],
       isBulkBilling: map['isBulkBilling'],
+      openHours: openHours,
       isChinese: map['isChinese'],
       photoUrl: map['photoUrl'],
       languages: languages,
@@ -122,6 +127,7 @@ class ClinicModel {
       'specialty': this.specialty,
       'isBulkBilling': this.isBulkBilling,
       'isChinese': this.isChinese,
+      'openHours': this.openHours.toMap(),
       'about': this.about.map((info) => info.toMap()).toList(),
       'info': this.info.map((info) => info.toMap()).toList(),
       'news': this.news.map((info) => info.toMap()).toList(),

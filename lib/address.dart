@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore_platform_interface/cloud_firestore_platform_interface.dart';
 
@@ -18,15 +20,27 @@ class AddressModel {
   });
   static AddressModel fromMap(Map<String, dynamic> map) {
     return AddressModel(
-      unitNumber: map['unitNumber'],
-      streetAddress: map['streetAddress'],
-      suburb: map['suburb'],
-      state: map['state'],
-      postcode: map['postcode'],
+      unitNumber: (map['unitNumber'] as String)?.trim(),
+      streetAddress: (map['streetAddress'] as String)?.trim(),
+      suburb: (map['suburb'] as String)?.trim(),
+      state: (map['state'] as String)?.trim(),
+      postcode: (map['postcode'] as String)?.trim(),
       position: map['position'],
     );
   }
 
+  Map<String, dynamic> toMap() {
+    return {
+      'unitNumber': this.unitNumber?.trim(),
+      'streetAddress': this.streetAddress?.trim(),
+      'suburb': this.suburb?.trim(),
+      'state': this.state?.trim(),
+      'postcode': this.postcode?.trim(),
+      'position': this.position,
+    };
+  }
+
+  @override
   String toString() {
     if (unitNumber != null && unitNumber != '') {
       return '$unitNumber / $streetAddress, $suburb, $state $postcode';
@@ -35,14 +49,11 @@ class AddressModel {
     return '$streetAddress, $suburb, $state $postcode';
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'unitNumber': this.unitNumber,
-      'streetAddress': this.streetAddress,
-      'suburb': this.suburb,
-      'state': this.state,
-      'postcode': this.postcode,
-      'position': this.position,
-    };
+  @override
+  bool operator ==(dynamic o) {
+    return o is AddressModel && o.toString() == this.toString();
   }
+
+  @override
+  int get hashCode => hashValues(this.toString(), '');
 }

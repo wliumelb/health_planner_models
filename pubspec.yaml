@@ -5,7 +5,7 @@ author: Edwin Liu
 homepage:
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.9.0-21.10.beta <3.0.0"
 
 dependencies:
   intl: ^0.16.1

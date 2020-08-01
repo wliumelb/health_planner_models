@@ -386,14 +386,18 @@ final clinicMap = {
   'intro': intro,
   'privacyPolicy': privacyPolicy,
   'welcomeMessage': welcomeMessage,
+  'openHours': {},
+  'contactInfo': {
+    'phone': '(03) 5568 0000',
+    'fax': '(03) 5568 0055',
+    'email': 'test123@test.com',
+    'website': 'gorup.net.au',
+    'thirdPartyUrl':
+        'https://www.hotdoc.com.au/medical-centres/port-fairy-VIC-3284/port-fairy-medical-clinic/doctors',
+  },
   'name': 'Port Fairy Medical Clinic',
   'photoUrl': '',
-  'address': addressMap,
-  'phone': '(03) 5568 0000',
-  'fax': '(03) 5568 0055',
-  'email': '',
   'doctorList': doctorMapList,
   'displayList': displayList,
-  'thirdPartyUrl':
-      'https://www.hotdoc.com.au/medical-centres/port-fairy-VIC-3284/port-fairy-medical-clinic/doctors',
+  ...addressMap,
 };
