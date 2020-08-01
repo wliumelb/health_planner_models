@@ -6,7 +6,9 @@ class DoctorModel {
   final String name;
   final String chineseName;
   final String uid;
-  // url of booking page(for web only) before; need use other platforms like hotdoc for now
+  final String clinicUid;
+
+  /// url of booking page(for web only) before; need use other platforms like hotdoc for now
   final String thirdPartyUrl;
   final String registrationNumber; // registration number with AHPRA.
   final bool genderIsMale;
@@ -21,6 +23,7 @@ class DoctorModel {
     @required this.name,
     @required this.chineseName,
     @required this.uid,
+    @required this.clinicUid,
     @required this.thirdPartyUrl,
     @required this.registrationNumber,
     @required this.genderIsMale,
@@ -42,6 +45,7 @@ class DoctorModel {
       name: map['name'],
       chineseName: map['chineseName'],
       uid: map['uid'],
+      clinicUid: map['clinicUid'],
       thirdPartyUrl: map['thirdPartyUrl'],
       registrationNumber: map['registrationNumber'],
       genderIsMale: map['genderIsMale'],
@@ -67,6 +71,7 @@ class DoctorModel {
     return {
       'name': this.name,
       'uid': this.uid,
+      'clinicUid': this.clinicUid,
       'chineseName': this.chineseName,
       'thirdPartyUrl': this.thirdPartyUrl,
       'genderIsMale': this.genderIsMale,
