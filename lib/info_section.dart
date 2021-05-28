@@ -1,27 +1,38 @@
-import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'info_section.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class InfoSectionModel {
+  @JsonKey(defaultValue: '')
   final String title;
+
+  @JsonKey(defaultValue: '')
   final String photoUrl;
-  final List<String> paragraphs;
+
+  @JsonKey(defaultValue: '')
+  final String body;
+
   InfoSectionModel({
-    @required this.title,
-    this.photoUrl,
-    @required this.paragraphs,
+    required this.title,
+    required this.photoUrl,
+    required this.body,
   });
-  static InfoSectionModel fromMap(Map<String, dynamic> map) {
-    return InfoSectionModel(
-      title: map['title'] ?? '',
-      photoUrl: map['photoUrl'], // could be null
-      paragraphs: List<String>.from(map['paragraphs' ?? []]),
-    );
+
+  factory InfoSectionModel.fromJson(Map<String, dynamic> json) =>
+      _$InfoSectionModelFromJson(json);
+  Map<String, dynamic> toJson() => _$InfoSectionModelToJson(this);
+
+  @override
+  String toString() {
+    return 'title: $title, photoUrl: $photoUrl, body: $body';
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'title': this.title,
-      'photoUrl': this.photoUrl,
-      'paragraphs': this.paragraphs,
-    };
+  @override
+  bool operator ==(Object o) {
+    return o is InfoSectionModel && o.toString() == toString();
   }
+
+  @override
+  int get hashCode => toString().hashCode;
 }

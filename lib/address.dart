@@ -1,48 +1,28 @@
-import 'dart:ui';
+import 'package:json_annotation/json_annotation.dart';
 
-import 'package:flutter/foundation.dart';
-import 'package:cloud_firestore_platform_interface/cloud_firestore_platform_interface.dart';
+part 'address.g.dart';
 
+@JsonSerializable(explicitToJson: true)
 class AddressModel {
   final String unitNumber;
   final String streetAddress;
   final String suburb;
   final String state;
   final String postcode;
-  final GeoPoint position;
   AddressModel({
-    @required this.unitNumber,
-    @required this.streetAddress,
-    @required this.suburb,
-    @required this.state,
-    @required this.postcode,
-    @required this.position,
+    required this.unitNumber,
+    required this.streetAddress,
+    required this.suburb,
+    required this.state,
+    required this.postcode,
   });
-  static AddressModel fromMap(Map<String, dynamic> map) {
-    return AddressModel(
-      unitNumber: (map['unitNumber'] as String)?.trim(),
-      streetAddress: (map['streetAddress'] as String)?.trim(),
-      suburb: (map['suburb'] as String)?.trim(),
-      state: (map['state'] as String)?.trim(),
-      postcode: (map['postcode'] as String)?.trim(),
-      position: map['position'],
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'unitNumber': this.unitNumber?.trim(),
-      'streetAddress': this.streetAddress?.trim(),
-      'suburb': this.suburb?.trim(),
-      'state': this.state?.trim(),
-      'postcode': this.postcode?.trim(),
-      'position': this.position,
-    };
-  }
+  factory AddressModel.fromJson(Map<String, dynamic> json) =>
+      _$AddressModelFromJson(json);
+  Map<String, dynamic> toJson() => _$AddressModelToJson(this);
 
   @override
   String toString() {
-    if (unitNumber != null && unitNumber != '') {
+    if (unitNumber != '') {
       return '$unitNumber / $streetAddress, $suburb, $state $postcode';
     }
 
@@ -55,5 +35,5 @@ class AddressModel {
   }
 
   @override
-  int get hashCode => hashValues(this.toString(), '');
+  int get hashCode => this.toString().hashCode;
 }

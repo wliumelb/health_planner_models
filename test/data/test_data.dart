@@ -386,7 +386,7 @@ final clinicMap = {
   'intro': intro,
   'privacyPolicy': privacyPolicy,
   'welcomeMessage': welcomeMessage,
-  'openHours': {},
+  'openHours': <String, dynamic>{},
   'contactInfo': {
     'phone': '(03) 5568 0000',
     'fax': '(03) 5568 0055',
@@ -399,5 +399,5 @@ final clinicMap = {
   'photoUrl': '',
   'doctorList': doctorMapList,
   'displayList': displayList,
-  ...addressMap,
+  'address': addressMap,
 };

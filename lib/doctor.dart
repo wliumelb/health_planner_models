@@ -1,86 +1,70 @@
-import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:health_planner_models/info_section.dart';
-import 'package:health_planner_models/schedule.dart';
+import 'package:health_planner_models/week_schedule.dart';
 
+part 'doctor.g.dart';
+
+enum Gender {
+  male,
+  female,
+  unspecified,
+}
+
+@JsonSerializable(explicitToJson: true)
 class DoctorModel {
-  final String name;
-  final String chineseName;
   final String uid;
-  final String clinicUid;
+
+  final String name;
+
+  final Gender gender;
+
+  @JsonKey(defaultValue: '')
+  final String specialty;
+
+  @JsonKey(defaultValue: '')
+  final String registrationNumber; // registration number with AHPRA.
+
+  @JsonKey(defaultValue: ['English'])
+  final List<String> languageList;
+
+  @JsonKey(defaultValue: [])
+  final List<InfoSectionModel> info;
+
+  final List<String> clinicList;
+
+  final String photoUrl;
 
   /// url of booking page(for web only) before; need use other platforms like hotdoc for now
+  @JsonKey(defaultValue: '')
   final String thirdPartyUrl;
-  final String registrationNumber; // registration number with AHPRA.
-  final bool genderIsMale;
-  final List<InfoSectionModel> info;
-  final List<InfoSectionModel> chineseInfo;
-  final String photoUrl;
-  final List<String> languages;
-  final String specialty;
-  final ScheduleModel schedule;
 
   DoctorModel({
-    @required this.name,
-    @required this.chineseName,
-    @required this.uid,
-    @required this.clinicUid,
-    @required this.thirdPartyUrl,
-    @required this.registrationNumber,
-    @required this.genderIsMale,
-    @required this.info,
-    @required this.chineseInfo,
-    @required this.photoUrl,
-    @required this.languages,
-    @required this.specialty,
-    @required this.schedule,
+    required this.uid,
+    required this.name,
+    required this.gender,
+    required this.specialty,
+    required this.registrationNumber,
+    required this.languageList,
+    required this.info,
+    required this.clinicList,
+    required this.photoUrl,
+    required this.thirdPartyUrl,
   });
 
-  static DoctorModel fromMap(Map<String, dynamic> map) {
-    final String uid = map['uid'];
-    final String clinicUid = map['clinicUid'];
-    assert(uid != null);
-    assert(clinicUid != null);
+  factory DoctorModel.fromJson(Map<String, dynamic> json) =>
+      _$DoctorModelFromJson(json);
+  Map<String, dynamic> toJson() => _$DoctorModelToJson(this);
 
-    return DoctorModel(
-      name: map['name'],
-      chineseName: map['chineseName'],
-      uid: map['uid'],
-      clinicUid: map['clinicUid'],
-      thirdPartyUrl: map['thirdPartyUrl'],
-      registrationNumber: map['registrationNumber'],
-      genderIsMale: map['genderIsMale'],
-      info: List.from(map['info'] ?? [])
-          .map((map) => InfoSectionModel.fromMap(map))
-          .toList(),
-      chineseInfo: List.from(map['chineseInfo'] ?? [])
-          .map((map) => InfoSectionModel.fromMap(map))
-          .toList(),
-      photoUrl: map['photoUrl'],
-      languages: List<String>.from(map['languages']),
-      specialty: map['specialty'],
-      schedule: ScheduleModel.fromMap(map['schedule'] ?? {}),
-    );
+  @override
+  String toString() {
+    return 'DoctorModel(uid: $uid, name: $name, gender: ${gender.toString().split('.')[1]}, specialty: $specialty, registrationNumber: $registrationNumber, languageList: $languageList, info: $info, clinicList: $clinicList, photoUrl: $photoUrl, thirdPartyUrl: $thirdPartyUrl)';
   }
 
-  Map<String, dynamic> toMap() {
-    final info = this.info.map((infoSection) => infoSection.toMap()).toList();
-    final chineseInfo =
-        this.chineseInfo.map((infoSection) => infoSection.toMap()).toList();
-    final schedule = this.schedule.toMap();
-
-    return {
-      'name': this.name,
-      'uid': this.uid,
-      'clinicUid': this.clinicUid,
-      'chineseName': this.chineseName,
-      'thirdPartyUrl': this.thirdPartyUrl,
-      'genderIsMale': this.genderIsMale,
-      'photoUrl': this.photoUrl,
-      'specialty': this.specialty,
-      'languages': this.languages,
-      'info': info,
-      'chineseInfo': chineseInfo,
-      'schedule': schedule,
-    };
+  @override
+  bool operator ==(Object o) {
+    return o is DoctorModel && o.toString() == toString();
   }
+
+  @override
+  int get hashCode => toString().hashCode;
 }
