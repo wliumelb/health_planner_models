@@ -17,10 +17,7 @@ DoctorModel _$DoctorModelFromJson(Map<String, dynamic> json) {
             ?.map((e) => e as String)
             .toList() ??
         ['English'],
-    info: (json['info'] as List<dynamic>?)
-            ?.map((e) => InfoSectionModel.fromJson(e as Map<String, dynamic>))
-            .toList() ??
-        [],
+    info: json['info'] as String? ?? '',
     clinicList:
         (json['clinicList'] as List<dynamic>).map((e) => e as String).toList(),
     photoUrl: json['photoUrl'] as String,
@@ -36,7 +33,7 @@ Map<String, dynamic> _$DoctorModelToJson(DoctorModel instance) =>
       'specialty': instance.specialty,
       'registrationNumber': instance.registrationNumber,
       'languageList': instance.languageList,
-      'info': instance.info.map((e) => e.toJson()).toList(),
+      'info': instance.info,
       'clinicList': instance.clinicList,
       'photoUrl': instance.photoUrl,
       'thirdPartyUrl': instance.thirdPartyUrl,

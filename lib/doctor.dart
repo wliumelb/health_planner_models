@@ -1,6 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:health_planner_models/info_section.dart';
-import 'package:health_planner_models/week_schedule.dart';
 
 part 'doctor.g.dart';
 
@@ -27,8 +25,8 @@ class DoctorModel {
   @JsonKey(defaultValue: ['English'])
   final List<String> languageList;
 
-  @JsonKey(defaultValue: [])
-  final List<InfoSectionModel> info;
+  @JsonKey(defaultValue: '')
+  final String info;
 
   final List<String> clinicList;
 

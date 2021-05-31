@@ -19,40 +19,21 @@ ClinicModel _$ClinicModelFromJson(Map<String, dynamic> json) {
             ?.map((e) => e as String)
             .toList() ??
         ['English'],
-    about: (json['about'] as List<dynamic>?)
-            ?.map((e) => InfoSectionModel.fromJson(e as Map<String, dynamic>))
+    notificationList: (json['notificationList'] as List<dynamic>?)
+            ?.map((e) => NotificationModel.fromJson(e as Map<String, dynamic>))
             .toList() ??
         [],
-    services: (json['services'] as List<dynamic>?)
-            ?.map((e) => InfoSectionModel.fromJson(e as Map<String, dynamic>))
-            .toList() ??
-        [],
-    info: (json['info'] as List<dynamic>?)
-            ?.map((e) => InfoSectionModel.fromJson(e as Map<String, dynamic>))
-            .toList() ??
-        [],
-    news: (json['news'] as List<dynamic>?)
-            ?.map((e) => InfoSectionModel.fromJson(e as Map<String, dynamic>))
-            .toList() ??
-        [],
-    intro: InfoSectionModel.fromJson(json['intro'] as Map<String, dynamic>),
-    billingPolicy: (json['billingPolicy'] as List<dynamic>?)
-            ?.map((e) => InfoSectionModel.fromJson(e as Map<String, dynamic>))
-            .toList() ??
-        [],
-    privacyPolicy: (json['privacyPolicy'] as List<dynamic>?)
-            ?.map((e) => e as String)
-            .toList() ??
-        [],
+    about: json['about'] as String? ?? '',
+    services: json['services'] as String? ?? '',
+    infoForPatient: json['infoForPatient'] as String? ?? '',
+    billingPolicy: json['billingPolicy'] as String? ?? '',
+    privacyPolicy: json['privacyPolicy'] as String? ?? '',
     address: AddressModel.fromJson(json['address'] as Map<String, dynamic>),
     contactInfo:
         ContactInfoModel.fromJson(json['contactInfo'] as Map<String, dynamic>),
-    doctorList:
-        (json['doctorList'] as List<dynamic>).map((e) => e as String).toList(),
-    displayList: (json['displayList'] as List<dynamic>?)
-            ?.map((e) => InfoSectionModel.fromJson(e as Map<String, dynamic>))
-            .toList() ??
-        [],
+    staffList:
+        (json['staffList'] as List<dynamic>).map((e) => e as String).toList(),
+    displayPhotoUrl: json['displayPhotoUrl'] as String? ?? '',
   );
 }
 
@@ -65,15 +46,15 @@ Map<String, dynamic> _$ClinicModelToJson(ClinicModel instance) =>
       'photoUrl': instance.photoUrl,
       'languageList': instance.languageList,
       'openHours': instance.openHours.toJson(),
-      'info': instance.info.map((e) => e.toJson()).toList(),
-      'about': instance.about.map((e) => e.toJson()).toList(),
-      'services': instance.services.map((e) => e.toJson()).toList(),
-      'billingPolicy': instance.billingPolicy.map((e) => e.toJson()).toList(),
-      'news': instance.news.map((e) => e.toJson()).toList(),
-      'displayList': instance.displayList.map((e) => e.toJson()).toList(),
+      'infoForPatient': instance.infoForPatient,
+      'about': instance.about,
+      'services': instance.services,
+      'billingPolicy': instance.billingPolicy,
+      'notificationList':
+          instance.notificationList.map((e) => e.toJson()).toList(),
+      'displayPhotoUrl': instance.displayPhotoUrl,
       'privacyPolicy': instance.privacyPolicy,
-      'intro': instance.intro.toJson(),
       'contactInfo': instance.contactInfo.toJson(),
       'address': instance.address.toJson(),
-      'doctorList': instance.doctorList,
+      'staffList': instance.staffList,
     };

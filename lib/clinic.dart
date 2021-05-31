@@ -1,11 +1,16 @@
+import 'package:health_planner_models/notification.dart';
 import 'package:health_planner_models/week_schedule.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:health_planner_models/contact_info.dart';
 
 import 'address.dart';
-import 'info_section.dart';
 
 part 'clinic.g.dart';
+
+class Specialty {
+  static String get generalPractitioner => 'General Practitioner';
+  static String get admin => 'Administration';
+}
 
 @JsonSerializable(explicitToJson: true)
 class ClinicModel {
@@ -26,41 +31,38 @@ class ClinicModel {
   final WeekScheduleModel openHours;
 
   /// general information for patient; e.g. how to register & what to do when visit the clinic
-  @JsonKey(defaultValue: [])
-  final List<InfoSectionModel> info;
+  @JsonKey(defaultValue: '')
+  final String infoForPatient;
 
   /// general information about the clinic
-  @JsonKey(defaultValue: [])
-  final List<InfoSectionModel> about;
+  @JsonKey(defaultValue: '')
+  final String about;
 
   /// list of services provided at the clinic
-  @JsonKey(defaultValue: [])
-  final List<InfoSectionModel> services;
+  @JsonKey(defaultValue: '')
+  final String services;
 
   /// information related to billing
-  @JsonKey(defaultValue: [])
-  final List<InfoSectionModel> billingPolicy;
+  @JsonKey(defaultValue: '')
+  final String billingPolicy;
 
   /// news about the clinic
   @JsonKey(defaultValue: [])
-  final List<InfoSectionModel> news;
+  final List<NotificationModel> notificationList;
 
   /// what to display on the home page
-  @JsonKey(defaultValue: [])
-  final List<InfoSectionModel> displayList;
+  @JsonKey(defaultValue: '')
+  final String displayPhotoUrl;
 
-  @JsonKey(defaultValue: [])
-  final List<String> privacyPolicy;
-
-  /// banner on the home page for important notifications
-  final InfoSectionModel intro;
+  @JsonKey(defaultValue: '')
+  final String privacyPolicy;
 
   final ContactInfoModel contactInfo;
 
   final AddressModel address;
 
   /// list of doctors' uids
-  final List<String> doctorList;
+  final List<String> staffList;
   ClinicModel({
     required this.uid,
     required this.name,
@@ -69,17 +71,16 @@ class ClinicModel {
     required this.openHours,
     required this.isBulkBilling,
     required this.languageList,
+    required this.notificationList,
     required this.about,
     required this.services,
-    required this.info,
-    required this.news,
-    required this.intro,
+    required this.infoForPatient,
     required this.billingPolicy,
     required this.privacyPolicy,
     required this.address,
     required this.contactInfo,
-    required this.doctorList,
-    required this.displayList,
+    required this.staffList,
+    required this.displayPhotoUrl,
   });
 
   factory ClinicModel.fromJson(Map<String, dynamic> json) =>

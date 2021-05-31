@@ -1,12 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:health_planner_models/address.dart';
 import 'package:health_planner_models/doctor.dart';
-import 'package:health_planner_models/info_section.dart';
 import 'package:health_planner_models/interval.dart';
 
 import 'data/address.dart';
 import 'data/doctor.dart';
-import 'data/info_section.dart';
 import 'data/interval.dart';
 
 void main() {
@@ -39,22 +37,6 @@ void main() {
       expect(doctor, doctor2);
       expect(doctor2.toString(), stringValue);
       print('done doctor test case $i\n');
-    }
-  });
-
-  test('infoSection', () {
-    final n = doctorTestData.length;
-    for (var i = 0; i < n; i++) {
-      print('test infoSection test case $i');
-      final data = infoSectionTestData[i];
-      final input = Map<String, Object>.from(data['input'] as Map);
-      final stringValue = data['value'] as String;
-      final infoSection = InfoSectionModel.fromJson(input);
-
-      final infoSection2 = InfoSectionModel.fromJson(infoSection.toJson());
-      expect(infoSection, infoSection2);
-      expect(infoSection2.toString(), stringValue);
-      print('done infoSection test case $i\n');
     }
   });
 
