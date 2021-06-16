@@ -15,10 +15,6 @@ ClinicModel _$ClinicModelFromJson(Map<String, dynamic> json) {
     openHours:
         WeekScheduleModel.fromJson(json['openHours'] as Map<String, dynamic>),
     isBulkBilling: json['isBulkBilling'] as bool? ?? false,
-    languageList: (json['languageList'] as List<dynamic>?)
-            ?.map((e) => e as String)
-            .toList() ??
-        ['English'],
     notificationList: (json['notificationList'] as List<dynamic>?)
             ?.map((e) => NotificationModel.fromJson(e as Map<String, dynamic>))
             .toList() ??
@@ -31,8 +27,14 @@ ClinicModel _$ClinicModelFromJson(Map<String, dynamic> json) {
     address: AddressModel.fromJson(json['address'] as Map<String, dynamic>),
     contactInfo:
         ContactInfoModel.fromJson(json['contactInfo'] as Map<String, dynamic>),
-    staffList:
-        (json['staffList'] as List<dynamic>).map((e) => e as String).toList(),
+    staffList: (json['staffList'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList() ??
+        [],
+    adminList: (json['adminList'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList() ??
+        [],
     displayPhotoUrl: json['displayPhotoUrl'] as String? ?? '',
   );
 }
@@ -44,7 +46,6 @@ Map<String, dynamic> _$ClinicModelToJson(ClinicModel instance) =>
       'isBulkBilling': instance.isBulkBilling,
       'specialty': instance.specialty,
       'photoUrl': instance.photoUrl,
-      'languageList': instance.languageList,
       'openHours': instance.openHours.toJson(),
       'infoForPatient': instance.infoForPatient,
       'about': instance.about,
@@ -57,4 +58,5 @@ Map<String, dynamic> _$ClinicModelToJson(ClinicModel instance) =>
       'contactInfo': instance.contactInfo.toJson(),
       'address': instance.address.toJson(),
       'staffList': instance.staffList,
+      'adminList': instance.adminList,
     };

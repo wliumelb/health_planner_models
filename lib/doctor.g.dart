@@ -10,7 +10,9 @@ DoctorModel _$DoctorModelFromJson(Map<String, dynamic> json) {
   return DoctorModel(
     uid: json['uid'] as String,
     name: json['name'] as String,
-    gender: _$enumDecode(_$GenderEnumMap, json['gender']),
+    email: json['email'] as String? ?? '',
+    gender: _$enumDecodeNullable(_$GenderEnumMap, json['gender']) ??
+        Gender.unspecified,
     specialty: json['specialty'] as String? ?? '',
     registrationNumber: json['registrationNumber'] as String? ?? '',
     languageList: (json['languageList'] as List<dynamic>?)
@@ -18,10 +20,15 @@ DoctorModel _$DoctorModelFromJson(Map<String, dynamic> json) {
             .toList() ??
         ['English'],
     info: json['info'] as String? ?? '',
-    clinicList:
-        (json['clinicList'] as List<dynamic>).map((e) => e as String).toList(),
-    photoUrl: json['photoUrl'] as String,
-    thirdPartyUrl: json['thirdPartyUrl'] as String? ?? '',
+    clinicList: (json['clinicList'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList() ??
+        [],
+    adminList: (json['adminList'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList() ??
+        [],
+    photoUrl: json['photoUrl'] as String? ?? '',
   );
 }
 
@@ -30,13 +37,14 @@ Map<String, dynamic> _$DoctorModelToJson(DoctorModel instance) =>
       'uid': instance.uid,
       'name': instance.name,
       'gender': _$GenderEnumMap[instance.gender],
+      'email': instance.email,
       'specialty': instance.specialty,
       'registrationNumber': instance.registrationNumber,
       'languageList': instance.languageList,
       'info': instance.info,
       'clinicList': instance.clinicList,
+      'adminList': instance.adminList,
       'photoUrl': instance.photoUrl,
-      'thirdPartyUrl': instance.thirdPartyUrl,
     };
 
 K _$enumDecode<K, V>(
@@ -63,6 +71,17 @@ K _$enumDecode<K, V>(
       return MapEntry(unknownValue, enumValues.values.first);
     },
   ).key;
+}
+
+K? _$enumDecodeNullable<K, V>(
+  Map<K, V> enumValues,
+  dynamic source, {
+  K? unknownValue,
+}) {
+  if (source == null) {
+    return null;
+  }
+  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
 }
 
 const _$GenderEnumMap = {

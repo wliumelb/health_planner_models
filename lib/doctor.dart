@@ -14,7 +14,12 @@ class DoctorModel {
 
   final String name;
 
+  @JsonKey(defaultValue: Gender.unspecified)
   final Gender gender;
+
+  // this will be the identity for the doctor to login and view
+  @JsonKey(defaultValue: '')
+  final String email;
 
   @JsonKey(defaultValue: '')
   final String specialty;
@@ -28,25 +33,28 @@ class DoctorModel {
   @JsonKey(defaultValue: '')
   final String info;
 
+  @JsonKey(defaultValue: [])
   final List<String> clinicList;
 
-  final String photoUrl;
+  // clinic admins that can change the info of this doctor
+  @JsonKey(defaultValue: [])
+  final List<String> adminList;
 
-  /// url of booking page(for web only) before; need use other platforms like hotdoc for now
   @JsonKey(defaultValue: '')
-  final String thirdPartyUrl;
+  final String photoUrl;
 
   DoctorModel({
     required this.uid,
     required this.name,
+    required this.email,
     required this.gender,
     required this.specialty,
     required this.registrationNumber,
     required this.languageList,
     required this.info,
     required this.clinicList,
+    required this.adminList,
     required this.photoUrl,
-    required this.thirdPartyUrl,
   });
 
   factory DoctorModel.fromJson(Map<String, dynamic> json) =>
@@ -55,7 +63,7 @@ class DoctorModel {
 
   @override
   String toString() {
-    return 'DoctorModel(uid: $uid, name: $name, gender: ${gender.toString().split('.')[1]}, specialty: $specialty, registrationNumber: $registrationNumber, languageList: $languageList, info: $info, clinicList: $clinicList, photoUrl: $photoUrl, thirdPartyUrl: $thirdPartyUrl)';
+    return 'DoctorModel(uid: $uid, name: $name, gender: ${gender.toString().split('.')[1]}, specialty: $specialty, registrationNumber: $registrationNumber, languageList: $languageList, info: $info, clinicList: $clinicList, photoUrl: $photoUrl)';
   }
 
   @override

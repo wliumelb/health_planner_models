@@ -6,7 +6,6 @@ part 'contact_info.g.dart';
 class ContactInfoModel {
   final String phone;
   final String email;
-  final String fax;
   // home page of the clinic
   final String website;
   // page from third party platforms e.g. hotdoc
@@ -15,7 +14,6 @@ class ContactInfoModel {
   ContactInfoModel({
     required this.phone,
     required this.email,
-    required this.fax,
     required this.website,
     required this.thirdPartyUrl,
   });

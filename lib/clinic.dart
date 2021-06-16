@@ -25,9 +25,6 @@ class ClinicModel {
 
   final String photoUrl;
 
-  @JsonKey(defaultValue: ['English'])
-  final List<String> languageList;
-
   final WeekScheduleModel openHours;
 
   /// general information for patient; e.g. how to register & what to do when visit the clinic
@@ -62,7 +59,12 @@ class ClinicModel {
   final AddressModel address;
 
   /// list of doctors' uids
+  @JsonKey(defaultValue: [])
   final List<String> staffList;
+
+  /// the list of uid of admin users that can modify this clinic's info
+  @JsonKey(defaultValue: [])
+  final List<String> adminList;
   ClinicModel({
     required this.uid,
     required this.name,
@@ -70,7 +72,6 @@ class ClinicModel {
     required this.specialty,
     required this.openHours,
     required this.isBulkBilling,
-    required this.languageList,
     required this.notificationList,
     required this.about,
     required this.services,
@@ -80,6 +81,7 @@ class ClinicModel {
     required this.address,
     required this.contactInfo,
     required this.staffList,
+    required this.adminList,
     required this.displayPhotoUrl,
   });
 
