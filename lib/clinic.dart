@@ -85,6 +85,26 @@ class ClinicModel {
     required this.displayPhotoUrl,
   });
 
+  static empty({String uid = '', String adminUid = ''}) => ClinicModel(
+        uid: uid,
+        name: '',
+        photoUrl: '',
+        specialty: '',
+        openHours: WeekScheduleModel.empty,
+        isBulkBilling: false,
+        notificationList: [],
+        about: '',
+        services: '',
+        infoForPatient: '',
+        billingPolicy: '',
+        privacyPolicy: '',
+        address: AddressModel.empty,
+        contactInfo: ContactInfoModel.empty,
+        staffList: [],
+        adminList: [adminUid],
+        displayPhotoUrl: '',
+      );
+
   factory ClinicModel.fromJson(Map<String, dynamic> json) =>
       _$ClinicModelFromJson(json);
   Map<String, dynamic> toJson() => _$ClinicModelToJson(this);

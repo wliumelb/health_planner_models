@@ -18,6 +18,13 @@ class ContactInfoModel {
     required this.thirdPartyUrl,
   });
 
+  static get empty => ContactInfoModel(
+        phone: '',
+        email: '',
+        website: '',
+        thirdPartyUrl: '',
+      );
+
   factory ContactInfoModel.fromJson(Map<String, dynamic> json) =>
       _$ContactInfoModelFromJson(json);
   Map<String, dynamic> toJson() => _$ContactInfoModelToJson(this);

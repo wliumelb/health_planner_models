@@ -16,6 +16,15 @@ class AddressModel {
     required this.state,
     required this.postcode,
   });
+
+  static get empty => AddressModel(
+        unitNumber: '',
+        streetAddress: '',
+        suburb: '',
+        state: '',
+        postcode: '',
+      );
+
   factory AddressModel.fromJson(Map<String, dynamic> json) =>
       _$AddressModelFromJson(json);
   Map<String, dynamic> toJson() => _$AddressModelToJson(this);

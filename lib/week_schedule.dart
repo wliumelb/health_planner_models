@@ -35,6 +35,16 @@ class WeekScheduleModel {
     required this.sunday,
   });
 
+  static get empty => WeekScheduleModel(
+        friday: [],
+        monday: [],
+        saturday: [],
+        sunday: [],
+        thursday: [],
+        tuesday: [],
+        wednesday: [],
+      );
+
   factory WeekScheduleModel.fromJson(Map<String, dynamic> json) {
     return WeekScheduleModel(
       monday: (json['monday'] as List<dynamic>?)
