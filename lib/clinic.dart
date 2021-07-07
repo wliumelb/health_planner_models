@@ -1,3 +1,4 @@
+import 'package:flutter_quill/models/quill_delta.dart';
 import 'package:health_planner_models/notification.dart';
 import 'package:health_planner_models/week_schedule.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -12,6 +13,7 @@ class Specialty {
   static String get admin => 'Administration';
 }
 
+@DeltaConverter()
 @JsonSerializable(explicitToJson: true)
 class ClinicModel {
   final String uid;
@@ -28,20 +30,16 @@ class ClinicModel {
   final WeekScheduleModel openHours;
 
   /// general information for patient; e.g. how to register & what to do when visit the clinic
-  @JsonKey(defaultValue: '')
-  final String infoForPatient;
+  final Delta infoForPatient;
 
   /// general information about the clinic
-  @JsonKey(defaultValue: '')
-  final String about;
+  final Delta about;
 
   /// list of services provided at the clinic
-  @JsonKey(defaultValue: '')
-  final String services;
+  final Delta services;
 
   /// information related to billing
-  @JsonKey(defaultValue: '')
-  final String billingPolicy;
+  final Delta billingPolicy;
 
   /// news about the clinic
   @JsonKey(defaultValue: [])
@@ -51,8 +49,7 @@ class ClinicModel {
   @JsonKey(defaultValue: '')
   final String displayPhotoUrl;
 
-  @JsonKey(defaultValue: '')
-  final String privacyPolicy;
+  final Delta privacyPolicy;
 
   final ContactInfoModel contactInfo;
 
@@ -85,27 +82,41 @@ class ClinicModel {
     required this.displayPhotoUrl,
   });
 
-  static empty({String uid = '', String adminUid = ''}) => ClinicModel(
-        uid: uid,
-        name: '',
-        photoUrl: '',
-        specialty: '',
-        openHours: WeekScheduleModel.empty,
-        isBulkBilling: false,
-        notificationList: [],
-        about: '',
-        services: '',
-        infoForPatient: '',
-        billingPolicy: '',
-        privacyPolicy: '',
-        address: AddressModel.empty,
-        contactInfo: ContactInfoModel.empty,
-        staffList: [],
-        adminList: [adminUid],
-        displayPhotoUrl: '',
-      );
+  static empty({String uid = '', String adminUid = ''}) {
+    final delta = Delta.fromJson([]);
+    ClinicModel(
+      uid: uid,
+      name: '',
+      photoUrl: '',
+      specialty: '',
+      openHours: WeekScheduleModel.empty,
+      isBulkBilling: false,
+      notificationList: [],
+      about: delta,
+      services: delta,
+      infoForPatient: delta,
+      billingPolicy: delta,
+      privacyPolicy: delta,
+      address: AddressModel.empty,
+      contactInfo: ContactInfoModel.empty,
+      staffList: [],
+      adminList: [adminUid],
+      displayPhotoUrl: '',
+    );
+  }
 
-  factory ClinicModel.fromJson(Map<String, dynamic> json) =>
-      _$ClinicModelFromJson(json);
+  factory ClinicModel.fromJson(Map<String, dynamic> json) => _$ClinicModelFromJson(json);
   Map<String, dynamic> toJson() => _$ClinicModelToJson(this);
+}
+
+class DeltaConverter implements JsonConverter<Delta, List<dynamic>> {
+  const DeltaConverter();
+
+  @override
+  Delta fromJson(List<dynamic>? jsonList) {
+    return Delta.fromJson(jsonList ?? []);
+  }
+
+  @override
+  List toJson(Delta delta) => delta.toJson();
 }

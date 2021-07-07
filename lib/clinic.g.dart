@@ -19,11 +19,14 @@ ClinicModel _$ClinicModelFromJson(Map<String, dynamic> json) {
             ?.map((e) => NotificationModel.fromJson(e as Map<String, dynamic>))
             .toList() ??
         [],
-    about: json['about'] as String? ?? '',
-    services: json['services'] as String? ?? '',
-    infoForPatient: json['infoForPatient'] as String? ?? '',
-    billingPolicy: json['billingPolicy'] as String? ?? '',
-    privacyPolicy: json['privacyPolicy'] as String? ?? '',
+    about: const DeltaConverter().fromJson(json['about'] as List),
+    services: const DeltaConverter().fromJson(json['services'] as List),
+    infoForPatient:
+        const DeltaConverter().fromJson(json['infoForPatient'] as List),
+    billingPolicy:
+        const DeltaConverter().fromJson(json['billingPolicy'] as List),
+    privacyPolicy:
+        const DeltaConverter().fromJson(json['privacyPolicy'] as List),
     address: AddressModel.fromJson(json['address'] as Map<String, dynamic>),
     contactInfo:
         ContactInfoModel.fromJson(json['contactInfo'] as Map<String, dynamic>),
@@ -47,14 +50,14 @@ Map<String, dynamic> _$ClinicModelToJson(ClinicModel instance) =>
       'specialty': instance.specialty,
       'photoUrl': instance.photoUrl,
       'openHours': instance.openHours.toJson(),
-      'infoForPatient': instance.infoForPatient,
-      'about': instance.about,
-      'services': instance.services,
-      'billingPolicy': instance.billingPolicy,
+      'infoForPatient': const DeltaConverter().toJson(instance.infoForPatient),
+      'about': const DeltaConverter().toJson(instance.about),
+      'services': const DeltaConverter().toJson(instance.services),
+      'billingPolicy': const DeltaConverter().toJson(instance.billingPolicy),
       'notificationList':
           instance.notificationList.map((e) => e.toJson()).toList(),
       'displayPhotoUrl': instance.displayPhotoUrl,
-      'privacyPolicy': instance.privacyPolicy,
+      'privacyPolicy': const DeltaConverter().toJson(instance.privacyPolicy),
       'contactInfo': instance.contactInfo.toJson(),
       'address': instance.address.toJson(),
       'staffList': instance.staffList,
